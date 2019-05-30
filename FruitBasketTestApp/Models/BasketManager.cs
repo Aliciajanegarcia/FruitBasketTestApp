@@ -25,16 +25,6 @@ namespace FruitBasketTestApp.Models
             return basket;
         }
 
-        ///// <summary>
-        ///// GetCart
-        ///// </summary>
-        ///// <param name="controller"></param>
-        ///// <returns></returns>
-        //public static BasketManager GetCart(Controller controller)
-        //{
-        //    return GetCart(controller.HttpContext);
-        //}
-        
 
         /// <summary>
         /// AddToCart
@@ -99,7 +89,7 @@ namespace FruitBasketTestApp.Models
             }
  
             var newtotal = totalexistingWeight + item.Weight;
-            return newtotal > MaxWeight ? false : true;
+            return newtotal > MaxWeight ? true : false;
         }
 
 

@@ -15,13 +15,15 @@ namespace FruitBasketTestApp.Controllers
         /// </summary>
         /// <returns></returns>
         // GET: products
-        public ActionResult Index()
+        public ActionResult Index(bool? overweight)
         {
             var products = from i in _dbContext.Products
                            select i;
 
             products = products.OrderBy(s => s.Name);
 
+            if (overweight == true)
+                ModelState.AddModelError("Products.Weight", "Max basket weight is 3kg. Go to Basket Summary to remove products.");
             return View(products);
         }
 

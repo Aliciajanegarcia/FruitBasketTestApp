@@ -35,9 +35,10 @@ namespace FruitBasketTestApp.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         //Add to cart
-        [HttpPost]
+
         public ActionResult AddToCart(int id)
         {
+
             // Retrieve the item from the database
             var addedItem = _dbContext.Products
                 .Single(item => item.ProductId == id);
@@ -45,21 +46,14 @@ namespace FruitBasketTestApp.Controllers
             // Add it to the shopping cart
             var basket = BasketManager.GetCart(this.HttpContext);
 
-            int count = basket.AddToBasket(addedItem);
+            //check the basket weight, if ok add to basket and update count, otherwise redirect to home and raise validation
+            if(basket.CheckReachedMaxWeight(addedItem))
+                return RedirectToAction("Index", "Home", new { overweight = true });
 
-            // Display the confirmation message
-            var results = new BasketViewModel
-            {
-                Message = Server.HtmlEncode(addedItem.Name) +
-                    " has been added to your shopping cart.",
-                BasketTotal = basket.GetTotal(),
-                BasketCount = basket.GetCount(),
-                ItemCount = count,
-                DeleteId = id
-            };
-            return Json(results);
+            //Otherwise we can add it to the basket
+            basket.AddToBasket(addedItem);
 
-            // return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         /// <summary>
