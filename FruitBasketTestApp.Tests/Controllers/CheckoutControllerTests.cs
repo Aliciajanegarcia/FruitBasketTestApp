@@ -11,15 +11,7 @@ namespace FruitBasketTestApp.Controllers.Tests
         [TestMethod()]
         public void AddressAndPaymentTest_PopulatesView_ReturnsView()
         {
-            // Arrange
-            CheckoutController controller = new CheckoutController();
-
-            // Act
-            ViewResult result = controller.AddressAndPayment() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-        }
+                    }
 
         [TestMethod()]
         public void AddressAndPaymentTest()
