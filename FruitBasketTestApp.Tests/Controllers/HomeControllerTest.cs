@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FruitBasketTestApp;
-using FruitBasketTestApp.Controllers;
 
-namespace FruitBasketTestApp.Tests.Controllers
+namespace FruitBasketTestApp.Controllers.Tests
 {
-    [TestClass]
+    [TestClass()]
     public class HomeControllerTest
     {
-        [TestMethod]
-        public void Index()
+        [TestMethod()]
+        public void Index_PopulatesView_ReturnsView()
         {
             // Arrange
             HomeController controller = new HomeController();
@@ -25,8 +19,23 @@ namespace FruitBasketTestApp.Tests.Controllers
             Assert.IsNotNull(result);
         }
 
+        
+
         [TestMethod]
-        public void About()
+        public void Details_PopulatesView_ReturnsView()
+        {
+            // Arrange
+            var controller = new HomeController();
+            // Act
+            var result = controller.Details(1) as ViewResult;
+            // Act
+            Assert.AreEqual("Details", result.ViewName);
+
+
+        }
+
+        [TestMethod()]
+        public void TestAboutView()
         {
             // Arrange
             HomeController controller = new HomeController();
@@ -35,11 +44,11 @@ namespace FruitBasketTestApp.Tests.Controllers
             ViewResult result = controller.About() as ViewResult;
 
             // Assert
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
+            Assert.IsNotNull(result);
         }
 
-        [TestMethod]
-        public void Contact()
+        [TestMethod()]
+        public void TestContactView()
         {
             // Arrange
             HomeController controller = new HomeController();
@@ -52,3 +61,4 @@ namespace FruitBasketTestApp.Tests.Controllers
         }
     }
 }
+
