@@ -8,10 +8,7 @@
     {
         public class OrderMetadata
         {
-            public partial class Order
-            {
-
-
+          
                 [Required(ErrorMessage = "First Name is required")]
                 [DisplayName("First Name")]
                 [StringLength(160)]
@@ -34,12 +31,8 @@
                 [StringLength(40)]
                 public string Country { get; set; }
 
-                //[DisplayName("Email Address")]
-                //[RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}",
-                //    ErrorMessage = "Email is is not valid.")]
-                //[DataType(DataType.EmailAddress)]
-                //public string Email { get; set; }
-            }
+   
+            
         }
     }
 }

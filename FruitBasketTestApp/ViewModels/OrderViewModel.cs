@@ -28,5 +28,7 @@ namespace FruitBasketTestApp.Models
         public decimal SubTotal { get; set; }
         public decimal ItemTotal { get; set; }
 
+
+
     }
 }

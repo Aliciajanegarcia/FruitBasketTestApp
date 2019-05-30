@@ -31,30 +31,29 @@ namespace FruitBasketTestApp.Controllers
         /// <returns></returns>
         // POST: /Checkout/AddressAndPayment
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddressAndPayment(FormCollection values)
         {
-            var order = new Order();
-            TryUpdateModel(order);
-
-            try
+            if (ModelState.IsValid)
             {
+
+                var order = new Order();
+                TryUpdateModel(order);
+
                 order.Username = User.Identity.Name;
                 order.Email = User.Identity.Name;
                 order.OrderDate = DateTime.Now;
-      
+
                 //Create the order
-                 var basket = BasketManager.GetCart(this.HttpContext);
-                 order = basket.CreateOrder(order);
+                var basket = BasketManager.GetCart(this.HttpContext);
+                order = basket.CreateOrder(order);
 
                 return RedirectToAction("Complete",
                     new { id = order.OrderId });
 
             }
-            catch
-            {
-                //Invalid - redisplay with errors
-                return View(order);
-            }
+            { return View(values); }
+
         }
 
         /// <summary>
